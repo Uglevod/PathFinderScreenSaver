@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze Escape Game</title>
+    <style>
+        body { 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 0px solid #333;
+        }
+        
+        /* Стили для меню */
+        #gameMenu {
+            position: absolute;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #111;
+            transition: left 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #ccc;
+            z-index: 10;
+        }
+        
+        #gameMenu.visible {
+            left: 0;
+        }
+        
+        #gameMenu h2 {
+            color: #fff;
+            margin-top: 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        #gameMenu label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        
+        #gameMenu input[type="range"],
+        #gameMenu input[type="number"] {
+            width: 100%;
+            margin-bottom: 15px;
+            background-color: #222;
+            color: #fff;
+            border: 1px solid #333;
+            padding: 5px;
+        }
+        
+        #gameMenu button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        #gameMenu button:hover {
+            background-color: #0b7dda;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .slider-container input[type="range"] {
+            flex: 1;
+            margin-right: 10px;
+        }
+        
+        .slider-container span {
+            min-width: 30px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    
+    <!-- Добавим меню настроек -->
+    <div id="gameMenu">
+        <h2>Настройки игры</h2>
+        
+        <label>Размер лабиринта:</label>
+        <div class="slider-container">
+            <input type="range" id="mazeSizeSlider" min="21" max="101" step="2" value="51">
+            <span id="mazeSizeValue">51</span>
+        </div>
+        
+        <label>Скорость бегунков:</label>
+        <div class="slider-container">
+            <input type="range" id="runnerSpeedSlider" min="1" max="20" step="0.5" value="2.5">
+            <span id="runnerSpeedValue">2.5</span>
+        </div>
+        
+        <label>Макс. количество бегунков:</label>
+        <div class="slider-container">
+            <input type="range" id="maxRunnersSlider" min="10" max="500" step="10" value="100">
+            <span id="maxRunnersValue">100</span>
+        </div>
+        
+        <label>Длина шлейфа:</label>
+        <div class="slider-container">
+            <input type="range" id="trailLengthSlider" min="10" max="100" step="5" value="50">
+            <span id="trailLengthValue">50</span>
+        </div>
+        
+        <label>Время исчезновения шлейфа (сек):</label>
+        <div class="slider-container">
+            <input type="range" id="trailLifetimeSlider" min="0.5" max="5" step="0.5" value="3">
+            <span id="trailLifetimeValue">3</span>
+        </div>
+        
+        <label>Интенсивность свечения шлейфа:</label>
+        <div class="slider-container">
+            <input type="range" id="trailGlowSlider" min="0" max="1" step="0.1" value="0.7">
+            <span id="trailGlowValue">0.7</span>
+        </div>
+        
+        <label>Вероятность взрыва бегунков:</label>
+        <div class="slider-container">
+            <input type="range" id="explosionChanceSlider" min="0" max="0.01" step="0.001" value="0.001">
+            <span id="explosionChanceValue">0.001</span>
+        </div>
+        
+        <label>Радиус разрушения:</label>
+        <div class="slider-container">
+            <input type="range" id="explosionRadiusSlider" min="1" max="5" step="1" value="2">
+            <span id="explosionRadiusValue">2</span>
+        </div>
+        
+        <button id="startButton">Начать игру</button>
+    </div>
+    
+    <script src="constants.js"></script>
+    <script src="maze.js"></script>
+    <script src="pathfinder.js"></script>
+    <script src="renderer.js"></script>
+    <script src="menu.js"></script>
+    <script src="game.js"></script>
+</body>
+</html> 
